@@ -5,19 +5,16 @@ export default function Menu() {
     // prefetch=true já é padrão
     <ul className="menu">
       <li>
-        <Link href="/" prefetch={true}>
-          Home
-        </Link>
+        <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/sobre#empresa" prefetch={true} scroll={false}>
-          Sobre
-        </Link>
+        <Link href="/sobre">Sobre</Link>
       </li>
       <li>
-        <Link href="/contato" prefetch={true}>
-          Contato
-        </Link>
+        <Link href="/contato">Contato</Link>
+      </li>
+      <li>
+        <Link href="/imc">IMC</Link>
       </li>
     </ul>
   );

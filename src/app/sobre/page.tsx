@@ -1,17 +1,15 @@
-import { Metadata } from "next";
+import Acesso from "@/components/Acesso"; // server component
+//import Width from "@/components/Width"; // client component
+import dynamic from "next/dynamic";
 
-export const metadata: Metadata = {
-  title: "Sobre",
-  description: "Essa é a página sobre",
-};
+const Width = dynamic(() => import("@/components/Acesso"), { ssr: false });
 
 export default function SobrePage() {
   return (
     <main>
       <h2>Sobre</h2>
-      <h2 style={{ margin: "1600px 0" }} id="empresa">
-        A empresa
-      </h2>
+      <Width />
+      <Acesso />
     </main>
   );
 }
