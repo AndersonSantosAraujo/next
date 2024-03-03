@@ -1,15 +1,18 @@
-import Acesso from "@/components/Acesso"; // server component
+// import Access from "@/components/Access"; // server component
 //import Width from "@/components/Width"; // client component
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-const Width = dynamic(() => import("@/components/Acesso"), { ssr: false });
+import ClientFetch from "@/components/ClientFetch";
+
+// const Width = dynamic(() => import("@/components/Access"), { ssr: false });
 
 export default function SobrePage() {
   return (
     <main>
       <h2>Sobre</h2>
-      <Width />
-      <Acesso />
+      <ClientFetch />
+      {/* <Width />
+      <Access /> */}
     </main>
   );
 }
