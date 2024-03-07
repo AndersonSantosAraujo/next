@@ -1,6 +1,23 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
 
-export default function Menu() {
+type Conta = {
+  autorizado: boolean;
+  usuario: string;
+};
+
+export default async function Menu() {
+  const token = cookies().get("token");
+
+  const response = await fetch("https://api.origamid.online/conta/perfil", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token?.value,
+    },
+  });
+
+  const data = (await response.json()) as Conta;
+
   return (
     // prefetch=true já é padrão
     <ul className="menu">
@@ -24,6 +41,13 @@ export default function Menu() {
       </li>
       <li>
         <Link href="/acoes">Ações</Link>
+      </li>
+      <li>
+        {data.autorizado ? (
+          <span>{data.usuario}</span>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
       </li>
     </ul>
   );
