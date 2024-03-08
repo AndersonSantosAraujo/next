@@ -25,6 +25,12 @@ export default async function Menu() {
         <Link href="/">Home</Link>
       </li>
       <li>
+        <Link href="/exemplo">Exemplo</Link>
+      </li>
+      <li>
+        <Link href="/new-login">Novo Login</Link>
+      </li>
+      <li>
         <Link href="/sobre">Sobre</Link>
       </li>
       <li>
