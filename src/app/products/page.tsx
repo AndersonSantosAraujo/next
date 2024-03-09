@@ -1,3 +1,5 @@
+import ProductsList from "@/components/ProductsList";
+
 export type Produtos = {
   id?: string;
   nome: string;
@@ -8,25 +10,30 @@ export type Produtos = {
 };
 
 export default async function ProductsPage() {
-  const response = await fetch("https://api.origamid.online/produtos", {
-    next: {
-      revalidate: 5,
-      // tags: ["products"],
-    },
-  });
-  const produtos = (await response.json()) as Produtos[];
+  // const response = await fetch("https://api.origamid.online/produtos", {
+  //   next: {
+  //     revalidate: 5,
+  //     // tags: ["products"],
+  //   },
+  // });
+
+  // if (!response.ok) throw new Error("Erro ao tentar carregar os produtos!");
+  // const produtos = (await response.json()) as Produtos[];
 
   return (
     <main>
       <h1>Produtos</h1>
-      <ul>
+      <p>Essa é a primeira lista</p>
+      <ProductsList />
+      {/* <ul>
         {produtos.map(({ id, nome, preco }) => (
           <li key={id}>
             <span>{nome}: </span>
             <span>R$ {preco}</span>
           </li>
         ))}
-      </ul>
+      </ul> */}
+      <p>Essa é a segunda lista</p>
     </main>
   );
 }
