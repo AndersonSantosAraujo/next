@@ -19,42 +19,57 @@ export default async function Menu() {
   const data = (await response.json()) as Conta;
 
   return (
-    // prefetch=true já é padrão
     <ul className="menu">
       <li>
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/exemplo">Exemplo</Link>
+        <Link href="/products">Produtos</Link>
       </li>
       <li>
-        <Link href="/new-login">Novo Login</Link>
-      </li>
-      <li>
-        <Link href="/sobre">Sobre</Link>
-      </li>
-      <li>
-        <Link href="/contato">Contato</Link>
-      </li>
-      <li>
-        <Link href="/imc">IMC</Link>
-      </li>
-      <li>
-        <Link href="/produtos">Produtos</Link>
-      </li>
-      <li>
-        <Link href="/cursos">Cursos</Link>
-      </li>
-      <li>
-        <Link href="/acoes">Ações</Link>
-      </li>
-      <li>
-        {data.autorizado ? (
-          <span>{data.usuario}</span>
-        ) : (
-          <Link href="/login">Login</Link>
-        )}
+        <Link href="/products/add">Adicionar Produto</Link>
       </li>
     </ul>
+
+    // prefetch=true já é padrão
+    // <ul className="menu">
+    //   <li>
+    //     <Link href="/">Home</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/cache">Cache</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/exemplo">Exemplo</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/new-login">Novo Login</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/sobre">Sobre</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/contato">Contato</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/imc">IMC</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/produtos">Produtos</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/cursos">Cursos</Link>
+    //   </li>
+    //   <li>
+    //     <Link href="/acoes">Ações</Link>
+    //   </li>
+    //   <li>
+    //     {data.autorizado ? (
+    //       <span>{data.usuario}</span>
+    //     ) : (
+    //       <Link href="/login">Login</Link>
+    //     )}
+    //   </li>
+    // </ul>
   );
 }
