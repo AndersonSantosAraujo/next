@@ -11,7 +11,7 @@ export default async function ProductsPage() {
   const response = await fetch("https://api.origamid.online/produtos", {
     next: {
       revalidate: 5,
-      tags: ["products"],
+      // tags: ["products"],
     },
   });
   const produtos = (await response.json()) as Produtos[];

@@ -1,40 +1,27 @@
 "use client";
 
-import RefreshProducts from "./RefreshProducts";
 import addProductAction from "@/actions/addProductAction";
-import { navigate } from "@/actions/navigate";
-import { Produtos } from "@/app/products/page";
+import { useFormState, useFormStatus } from "react-dom";
+
+function Button() {
+  const status = useFormStatus();
+  return (
+    <button type="submit" disabled={status.pending}>
+      Adicionar
+    </button>
+  );
+}
 
 export default function AddProductForm() {
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const elements = e.currentTarget.elements;
+  const [state, formAction] = useFormState(addProductAction, {
+    errors: [],
+  });
 
-    const name = (elements.namedItem("name") as HTMLInputElement).value;
-    const price = (elements.namedItem("price") as HTMLInputElement).value;
-    const description = (elements.namedItem("description") as HTMLInputElement)
-      .value;
-    const stock = (elements.namedItem("stock") as HTMLInputElement).value;
-    const imported = (elements.namedItem("imported") as HTMLInputElement)
-      .checked;
-
-    const body: Produtos = {
-      nome: name,
-      preco: Number(price),
-      descricao: description,
-      estoque: Number(stock),
-      importado: imported ? 1 : 0,
-    };
-    const response = await addProductAction(body);
-
-    if (response) {
-      RefreshProducts();
-      navigate("/products");
-    }
-  }
+  console.log(state);
 
   return (
-    <form onSubmit={handleSubmit}>
+    // <form action={addProductAction}>
+    <form action={formAction}>
       <label htmlFor="name">Nome</label>
       <input type="text" id="name" name="name" />
 
@@ -52,7 +39,13 @@ export default function AddProductForm() {
         Importado
       </label>
 
-      <button type="submit">Adicionar</button>
+      {state.errors.map((error, index) => (
+        <p style={{ color: "red", fontSize: "14px" }} key={index}>
+          {error}
+        </p>
+      ))}
+
+      <Button />
     </form>
   );
 }
