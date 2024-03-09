@@ -1,4 +1,5 @@
 import ProductsList from "@/components/ProductsList";
+import { Suspense } from "react";
 
 export type Produtos = {
   id?: string;
@@ -24,7 +25,18 @@ export default async function ProductsPage() {
     <main>
       <h1>Produtos</h1>
       <p>Essa é a primeira lista</p>
-      <ProductsList />
+      {/* <Suspense fallback={"Carregando..."}> */}
+      <Suspense fallback={<SuspenseLoading />}>
+        {/* esse delay abaixo é um debug para teste do Suspense somente */}
+        <ProductsList delay={1000} />
+      </Suspense>
+
+      <p>Essa é a segunda lista</p>
+      <Suspense fallback={<SuspenseLoading />}>
+        {/* esse delay abaixo é um debug para teste do Suspense somente */}
+        <ProductsList delay={2000} />
+      </Suspense>
+
       {/* <ul>
         {produtos.map(({ id, nome, preco }) => (
           <li key={id}>
@@ -33,7 +45,22 @@ export default async function ProductsPage() {
           </li>
         ))}
       </ul> */}
-      <p>Essa é a segunda lista</p>
     </main>
+  );
+}
+
+function SuspenseLoading() {
+  return (
+    <p
+      style={{
+        display: "inline-block",
+        padding: "5px",
+        background: "red",
+        color: "white",
+        fontSize: "32px",
+      }}
+    >
+      Loading...
+    </p>
   );
 }

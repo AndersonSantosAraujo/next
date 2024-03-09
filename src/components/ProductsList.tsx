@@ -1,13 +1,17 @@
 import { Produtos } from "@/app/products/page";
 
-export default async function ProductsList() {
+export default async function ProductsList({ delay }: { delay?: number }) {
   let error = false;
   let produtos: Produtos[] = [];
+
+  if (delay) await new Promise((resolve) => setTimeout(resolve, delay));
+
   try {
-    const response = await fetch("https://api.origamid.online/produtoss", {
-      next: {
-        revalidate: 5,
-      },
+    const response = await fetch("https://api.origamid.online/produtos", {
+      cache: "no-store",
+      // next: {
+      //   revalidate: 5,
+      // },
     });
 
     if (!response.ok) throw new Error("Erro ao tentar carregar os produtos!");
