@@ -4,12 +4,21 @@ type Acao = {
   atualizada: string;
 };
 
-export default async function AcoesPage() {
-  const response = await fetch("https://api.origamid.online/acoes/lua", {
-    next: {
-      revalidate: 5,
+type PageParams = {
+  params: {
+    acao: string;
+  };
+};
+
+export default async function AcaoPage({ params }: PageParams) {
+  const response = await fetch(
+    `https://api.origamid.online/acoes/${params.acao}`,
+    {
+      next: {
+        revalidate: 5,
+      },
     },
-  });
+  );
   const acao = (await response.json()) as Acao;
 
   return (

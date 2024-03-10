@@ -1,75 +1,54 @@
-import { cookies } from "next/headers";
+"use client";
+
 import Link from "next/link";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import { Suspense, useEffect } from "react";
 
-type Conta = {
-  autorizado: boolean;
-  usuario: string;
-};
+export default function Menu() {
+  const params = useParams();
+  const pathName = usePathname();
+  const router = useRouter();
 
-export default async function Menu() {
-  const token = cookies().get("token");
+  console.log(pathName);
 
-  const response = await fetch("https://api.origamid.online/conta/perfil", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token?.value,
-    },
-  });
+  useEffect(() => {
+    console.log("Rota mudou!");
+  }, [pathName]);
 
-  const data = (await response.json()) as Conta;
+  // useEffect(() => {
+  // setTimeout(() => {
+  //   router.push("/");
+  // }, 5000);
+  // setInterval(() => {
+  //   router.refresh();
+  // }, 5000);
+  // }, [router]);
+
+  function Search() {
+    const searchParams = useSearchParams();
+    const busca = searchParams.get("busca");
+    return <div>Busca: {busca}</div>;
+  }
 
   return (
-    <ul className="menu">
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/products">Produtos</Link>
-      </li>
-      <li>
-        <Link href="/products/add">Adicionar Produto</Link>
-      </li>
-    </ul>
-
-    // prefetch=true já é padrão
-    // <ul className="menu">
-    //   <li>
-    //     <Link href="/">Home</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/cache">Cache</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/exemplo">Exemplo</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/new-login">Novo Login</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/sobre">Sobre</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/contato">Contato</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/imc">IMC</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/produtos">Produtos</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/cursos">Cursos</Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/acoes">Ações</Link>
-    //   </li>
-    //   <li>
-    //     {data.autorizado ? (
-    //       <span>{data.usuario}</span>
-    //     ) : (
-    //       <Link href="/login">Login</Link>
-    //     )}
-    //   </li>
-    // </ul>
+    <>
+      <Suspense>
+        {/* <Search /> precisa ser envolvido por um <Suspense> */}
+        <Search />
+      </Suspense>
+      <ul className="menu">
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/acoes/?busca=xpt">Ações: {params.acao}</Link>
+        </li>
+      </ul>
+    </>
   );
 }
