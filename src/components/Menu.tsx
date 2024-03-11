@@ -46,6 +46,9 @@ export default function Menu() {
           <Link href="/">Home</Link>
         </li>
         <li>
+          <Link href="/cursos">Cursos</Link>
+        </li>
+        <li>
           <Link href="/acoes/?busca=xpt">Ações: {params.acao}</Link>
         </li>
       </ul>
