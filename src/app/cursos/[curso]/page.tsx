@@ -1,6 +1,7 @@
 import { getCurso, getCursos } from "@/api/cursos";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type PageParams = {
   params: {
@@ -47,6 +48,8 @@ export async function generateMetadata({
 
 export default async function CursoPage({ params }: PageParams) {
   const data = await getCurso(params.curso);
+
+  if (data.error) return notFound();
 
   return (
     <div>
