@@ -1,7 +1,8 @@
 import { getCurso, getCursos } from "@/api/cursos";
+import { Metadata } from "next";
 import Link from "next/link";
 
-type PageProps = {
+type PageParams = {
   params: {
     curso: string;
   };
@@ -26,7 +27,25 @@ export async function generateStaticParams() {
   });
 }
 
-export default async function CursoPage({ params }: PageProps) {
+// export const metadata: Metadata = {
+//   title: "Cursos Origamid",
+//   description: "Cursos online de Front End e UI Design.",
+//   keywords: ["HTML", "CSS", "JavaScript", "UI Design"],
+//   authors: [{ name: "Anderson", url: "https://anderson.com" }],
+// };
+
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
+  const curso = await getCurso(params.curso);
+
+  return {
+    title: curso.nome,
+    description: curso.descricao,
+  };
+}
+
+export default async function CursoPage({ params }: PageParams) {
   const data = await getCurso(params.curso);
 
   return (
