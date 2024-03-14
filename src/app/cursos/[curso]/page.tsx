@@ -53,7 +53,6 @@ export default async function CursoPage({ params }: PageParams) {
 
   return (
     <div>
-      <Link href={`/cursos`}>Voltar</Link>
       <h1>Curso de {data.nome}</h1>
       <p>Descrição: {data.descricao}</p>
       <p>Total de Horas: {data.total_horas}</p>
@@ -66,6 +65,7 @@ export default async function CursoPage({ params }: PageParams) {
           </li>
         ))}
       </ul>
+      <Link href={`/cursos`}>Voltar</Link>
     </div>
   );
 }

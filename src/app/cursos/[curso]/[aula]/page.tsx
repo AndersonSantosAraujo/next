@@ -25,10 +25,10 @@ export default async function AulaPage({ params }: PageProps) {
 
   return (
     <div>
-      <Link href={`/cursos/${params.curso}`}>Voltar</Link>
       <h1>Aula: {data.nome}</h1>
       <p>Descrição: {data.descricao}</p>
       <p>Temp: {data.tempo}</p>
+      <Link href={`/cursos/${params.curso}`}>Voltar</Link>
     </div>
   );
 }
