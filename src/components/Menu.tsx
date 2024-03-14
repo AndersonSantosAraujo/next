@@ -10,15 +10,15 @@ import {
 import { Suspense, useEffect } from "react";
 
 export default function Menu() {
-  const params = useParams();
-  const pathName = usePathname();
-  const router = useRouter();
+  // const params = useParams();
+  // const pathName = usePathname();
+  // const router = useRouter();
 
-  console.log(pathName);
+  // console.log(pathName);
 
-  useEffect(() => {
-    console.log("Rota mudou!");
-  }, [pathName]);
+  // useEffect(() => {
+  //   console.log("Rota mudou!");
+  // }, [pathName]);
 
   // useEffect(() => {
   // setTimeout(() => {
@@ -49,7 +49,7 @@ export default function Menu() {
           <Link href="/cursos">Cursos</Link>
         </li>
         <li>
-          <Link href="/acoes/?busca=xpt">Ações: {params.acao}</Link>
+          <Link href="/animais">Animais</Link>
         </li>
       </ul>
     </>
